@@ -1,8 +1,9 @@
 package com.example.storesapp
 
 import android.app.Application
-import androidx.room.Database
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 class StoreApplication: Application() {
     companion object {
@@ -12,7 +13,18 @@ class StoreApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE StoreEntity ADD COLUMN photoUrl TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
+
         val DATABASE_STORE_NAME = "StoreDatabase"
-        database = Room.databaseBuilder(this,StoreDatabase::class.java,DATABASE_STORE_NAME).build()
+        database = Room.databaseBuilder(this,
+            StoreDatabase::class.java,
+            DATABASE_STORE_NAME)
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 }
