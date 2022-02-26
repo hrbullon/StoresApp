@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">StoresApp</string>
+    <string name="description_img_photo">Store image photo</string>
+    <string name="store_add">Store add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_name">Store Name</string>
+    <string name="helper_required">Required</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_url">Website URL</string>
+    <string name="hint_photo_url">Image URL</string>
+    <string name="edit_store_title_add">Add store</string>
+    <string name="menu_save">Save</string>
+    <string name="edit_store_save_message_success">Added Store successully</string>
+    <string name="arg_id">key_id</string>
+</resources>
