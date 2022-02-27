@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TiendasApp</string>
+    <string name="description_img_photo">Imagen de Tienda</string>
+    <string name="store_add">Agregar Tienda</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hint_name">Nombre de la tienda</string>
+    <string name="helper_required">Requerido</string>
+    <string name="hint_phone">Teléfono</string>
+    <string name="hint_url">Sitio Web</string>
+    <string name="hint_photo_url">URL de la imagen</string>
+    <string name="edit_store_title_add">Agregar Tienda</string>
+    <string name="menu_save">Guardar</string>
+    <string name="edit_store_save_message_success">Tienda agregada</string>
+    <string name="arg_id" translatable="false">key_id</string>
+    <string name="edit_store_update_message_success">Tienda editada</string>
+    <string name="edit_store_message_valid">Llenar  los campos requeridos</string>
+    <string name="edit_store_title_edit">Editar Tienda</string>
+    <string name="dialog_delete_title">Eliminar Tienda?</string>
+    <string name="delete_confirm">Eliminar</string>
+    <string name="delete_cancel">Cancelar</string>
+    <string name="main_error_website_empty">Sitio web vacía</string>
+    <string name="erro_no_compatible_apps">No hay aplicaciones compatibles</string>
+    <string name="options_item_call">Llamar</string>
+    <string name="options_item_website">Ir al sitio web</string>
+</resources>

@@ -1,6 +1,9 @@
 package com.example.storesapp
 
 import android.app.Application
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -9,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.storesapp.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     private fun setupRecyclerView() {
 
         mAdapter = StoreAdapter(mutableListOf(), this)
-        mGridLayout = GridLayoutManager(this, 2)
+        mGridLayout = GridLayoutManager(this, resources.getInteger(R.integer.main_columns))
 
         getStores()
 
@@ -90,18 +94,70 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         doAsync {
             StoreApplication.database.storeDao().updateStore(storeEntity)
             uiThread {
-                mAdapter.update(storeEntity)
+                updateStore(storeEntity)
             }
         }
     }
 
     override fun onDeleteStore(storeEntity: StoreEntity) {
-        doAsync {
-            StoreApplication.database.storeDao().deleteStore(storeEntity)
-            uiThread {
-                mAdapter.delete(storeEntity)
-            }
+
+    }
+
+    override fun onShowActions(storeEntity: StoreEntity) {
+        val items = resources.getStringArray(R.array.array_options_item)
+
+        MaterialAlertDialogBuilder(this)
+            .setItems(items, { dialog, which ->
+                when(which){
+                    0 -> confirmDelete(storeEntity)
+                    1 -> dial(storeEntity.phone)
+                    2 -> goToWebsite(storeEntity.website)
+                }
+            })
+            .show()
+    }
+
+    private fun dial(phone: String){
+        val callIntent = Intent().apply {
+            action = Intent.ACTION_DIAL
+            data = Uri.parse("tel:$phone")
         }
+        startIntent(callIntent)
+    }
+
+    private fun goToWebsite(website: String){
+        if(website.isEmpty()){
+            Toast.makeText(this, getString(R.string.main_error_website_empty), Toast.LENGTH_LONG).show()
+        }else{
+            val websiteIntent = Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse(website)
+            }
+            startIntent(websiteIntent)
+        }
+    }
+
+    private fun startIntent(intent: Intent) {
+        if(intent.resolveActivity(packageManager) != null){
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, getString(R.string.erro_no_compatible_apps), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun confirmDelete(storeEntity: StoreEntity){
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.dialog_delete_title)
+            .setPositiveButton(getString(R.string.delete_confirm), { dialog, which ->
+                doAsync {
+                    StoreApplication.database.storeDao().deleteStore(storeEntity)
+                    uiThread {
+                        mAdapter.delete(storeEntity)
+                    }
+                }
+            })
+            .setNegativeButton(getString(R.string.delete_cancel), null)
+            .show()
     }
 
     /**
@@ -116,6 +172,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     }
 
     override fun updateStore(storeEntity: StoreEntity) {
-
+        mAdapter.update(storeEntity)
     }
 }

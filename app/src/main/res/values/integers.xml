@@ -4,4 +4,5 @@
     <integer name="counter_max_phone">13</integer>
     <integer name="counter_lines_url">2</integer>
     <integer name="counter_lines_image_url">4</integer>
+    <integer name="main_columns">2</integer>
 </resources>

@@ -12,5 +12,15 @@
     <string name="edit_store_title_add">Add store</string>
     <string name="menu_save">Save</string>
     <string name="edit_store_save_message_success">Added Store successully</string>
-    <string name="arg_id">key_id</string>
+    <string name="arg_id" translatable="false">key_id</string>
+    <string name="edit_store_update_message_success">Updated Store</string>
+    <string name="edit_store_message_valid">Fill required inputs</string>
+    <string name="edit_store_title_edit">Edit Store</string>
+    <string name="dialog_delete_title">Delete Store?</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="delete_cancel">Cancel</string>
+    <string name="main_error_website_empty">Website empty</string>
+    <string name="erro_no_compatible_apps">No compatible apps</string>
+    <string name="options_item_call">Call</string>
+    <string name="options_item_website">Go to Website</string>
 </resources>

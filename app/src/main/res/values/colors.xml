@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_white_t">#CCFFFFFF</color>
     <color name="color_text_url">#303F9F</color>
+
+    <color name="primaryColor">#4db6ac</color>
+    <color name="primaryDarkColor">#00867d</color>
+    <color name="secondaryColor">#ff1744</color>
+    <color name="secondaryDarkColor">#c4001d</color>
 </resources>
